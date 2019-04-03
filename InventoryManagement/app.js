@@ -14,8 +14,17 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // CORS handling
-const cors = require('cors');
-app.use(cors)
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    if (req.method === 'OPTIONS')   {
+        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+        return res.status(200).json({});
+    }
+    next();
+});
+// const cors = require('cors');
+// app.use(cors)
 
 // Mongoose database connection 
 const mongoose = require('mongoose');
@@ -23,10 +32,6 @@ mongoose.connect(process.env.MONGODB_URI,{
     useCreateIndex: true,
     useNewUrlParser: true
 });
-
-app.use('/api', function(req, res, next) {
-    res.status(200).json({message: "I am here"});
-})
 
 // Inventory routes
 const inventoryRoutes = require('./src/router');

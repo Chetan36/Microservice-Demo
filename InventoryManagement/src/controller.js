@@ -1,12 +1,11 @@
 const service = require('./service');
-const config = require('./config');
+const httpconfig = require('./httpconfig');
 
 module.exports = {
     getItems: function(req, res, next) {
-        console.log("I am here")
         service.getAllItems()
         .then(response => {
-            res.status(200).json(responseFormatter(200, response));
+            res.status(200).json(httpconfig.responseFormatter(200, response));
         })
         .catch(error => {
             next(error);
@@ -15,7 +14,7 @@ module.exports = {
     getItemById: function(req, res, next) {
         service.getItemById(req.params.id)
         .then(response => {
-            res.status(200).json(response);
+            res.status(200).json(httpconfig.responseFormatter(200, response));
         })
         .catch(error => {
             next(error);
@@ -24,7 +23,7 @@ module.exports = {
     getItemByName: function(req, res, next) {
         service.getItemByName(req.params.name)
         .then(response => {
-            res.status(200).json(response);
+            res.status(200).json(httpconfig.responseFormatter(200, response));
         })
         .catch(error => {
             next(error);
@@ -33,7 +32,7 @@ module.exports = {
     getItemsWithinStock: function(req, res, next) {
         service.getItemsBetweenStockValues(req.body.from, req.body.to)
         .then(response => {
-            res.status(200).json(response);
+            res.status(200).json(httpconfig.responseFormatter(200, response));
         })
         .catch(error => {
             next(error);
