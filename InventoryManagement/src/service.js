@@ -34,8 +34,8 @@ module.exports = {
         }
         return repository.insert(item);
     },
-    updateItem: function(item) {
-        return repository.update(item);
+    updateItem: function(id, item) {
+        return repository.update(id, item);
     },
     deleteItem: function(id) {
         return repository.delete(id);

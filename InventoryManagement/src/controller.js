@@ -57,7 +57,7 @@ module.exports = {
         })
     },
     updateItem: function(req, res, next) {
-        service.updateItem(req.body)
+        service.updateItem(req.params.id, req.body)
         .then(response => {
             res.status(200).json(httpconfig.responseFormatter(200, response));
         })
@@ -66,6 +66,12 @@ module.exports = {
         })
     },
     deleteItem: function(req, res, next) {
-
+        service.deleteItem(req.params.id)
+        .then(response => {
+            res.status(200).json(httpconfig.responseFormatter(200, response));
+        })
+        .catch(error => {
+            next(error);
+        })
     }
 }
