@@ -41,17 +41,29 @@ module.exports = {
     getItemsOutOfStock: function(req, res, next) {
         service.getItemsWithStockValue(0)
         .then(response => {
-            res.status(200).json(responseFormatter(200, response));
+            res.status(200).json(httpconfig.responseFormatter(200, response));
         })
         .catch(error => {
             next(error);
         })
     },
     addItem: function(req, res, next) {
-
+        service.addNewItem(req.body)
+        .then(response => {
+            res.status(201).json(httpconfig.responseFormatter(201, response));
+        })
+        .catch(error => {
+            next(error);
+        })
     },
     updateItem: function(req, res, next) {
-
+        service.updateItem(req.body)
+        .then(response => {
+            res.status(200).json(httpconfig.responseFormatter(200, response));
+        })
+        .catch(error => {
+            next(error);
+        })
     },
     deleteItem: function(req, res, next) {
 
