@@ -33,9 +33,9 @@ mongoose.connect(process.env.MONGODB_URI,{
     useNewUrlParser: true
 });
 
-// Inventory routes
-const inventoryRoutes = require('./src/router');
-app.use('/invmgmt', inventoryRoutes);
+// Order routes
+const orderRoutes = require('./src/router');
+app.use('/ordermgmt', orderRoutes);
 
 // No route to serve request
 app.use((req, res, next) => {
