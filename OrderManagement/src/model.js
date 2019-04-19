@@ -9,23 +9,12 @@ const OrderSchema = mongoose.Schema({
         unique:true,
         ref: 'id'
     },
-    orderId: {
-        type: String,
-        unique: true,
-        require: true
-    },
     userId: {
         type: Number,
         require: true
     },
     items: {
         type: Array
-    },
-    itemTotalPrice: {
-        type: Number
-    },
-    taxTotal: {
-        type: Number
     },
     netAmount: {
         type: Number

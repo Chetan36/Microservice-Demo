@@ -15,5 +15,24 @@ module.exports = {
     },
     getOrdersByPlacedDate: function(date) {
         return repository.findByPlacedDate(date)
+    },
+    addNewOrder: function(order, userId) {
+        let totalPrice = 0
+        order.items.map(item => {
+            totalPrice += item.price
+        })
+        let dbOrder = {
+            userId: userId,
+            items: order.items,
+            netAmount: totalPrice,
+            placedDate: Date.now()
+        }
+        return repository.insert(dbOrder);
+    },
+    updateOrder: function(orderId, order) {
+
+    },
+    deleteOrder: function(orderId) {
+
     }
 }
